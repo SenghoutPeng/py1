@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f4f4f4;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Students</h1>
+    <ul>
+        {% for s in students %}
+        <li><strong>{{ s.student_code }}</strong> - {{ s.name }} ({{ s.email }})</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

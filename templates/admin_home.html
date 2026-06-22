@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            max-width: 800px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        th,
+        td {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #f4f4f4;
+        }
+
+        a.btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        a.btn-danger {
+            background: #dc3545;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.9em;
+        }
+
+        a.btn-edit {
+            background: #28a745;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Panel Dashboard</h1>
+
+    <h2>Departments</h2>
+    <a href="{% url 'department_create' %}" class="btn">Add Department</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dept in departments %}
+            <tr>
+                <td>{{ dept.id }}</td>
+                <td>{{ dept.name }}</td>
+                <td>
+                    <a href="{% url 'department_edit' dept.id %}" class="btn btn-edit">Edit</a>
+                    <a href="{% url 'department_delete' dept.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No departments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Students</h2>
+    <a href="{% url 'student_create' %}" class="btn">Add Student</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.student_code }}</td>
+                <td>{{ s.name }}</td>
+                <td>{{ s.email }}</td>
+                <td>{{ s.department.name|default:"None" }}</td>
+                <td>
+                    <a href="{% url 'student_edit' s.id %}" class="btn btn-edit">Edit</a>
+                    <a href="{% url 'student_delete' s.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No students found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><a href="/">View Site Homepage</a>
+</body>
+
+</html>
